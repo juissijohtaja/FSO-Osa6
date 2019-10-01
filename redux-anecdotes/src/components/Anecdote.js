@@ -1,13 +1,13 @@
 import React from 'react'
 
-const Anecdote = ({ note, handleClick }) => {
+const Anecdote = ({ anecdote, handleClick }) => {
   return (
-    <li key={note.id}>
+    <li key={anecdote.id}>
           <div>
-            {note.content}
+            {anecdote.content}
           </div>
           <div>
-            has {note.votes}
+            has {anecdote.votes}
             <button onClick={handleClick}>vote</button>
           </div>
     </li>
