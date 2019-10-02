@@ -1,31 +1,31 @@
 import React from 'react'
 import { filterChange } from '../reducers/filterReducer'
+import { connect } from 'react-redux'
 
 const VisibilityFilter = (props) => {
 
-  const filterClicked = (value) => {
-    props.store.dispatch(filterChange(value))
-  }
-
   return (
     <div>
+      all
       <input
         type="radio"
         name="filter"
-        onChange={() => filterClicked('ALL')}
-      /> all<br/>
+        onChange={() => props.filterChange('ALL')}
+      />
+      important
       <input
         type="radio"
         name="filter"
-        onChange={() => filterClicked('IMPORTANT')}
-      /> important<br/>
+        onChange={() => props.filterChange('IMPORTANT')}
+      />
+      nonimportant
       <input
         type="radio"
         name="filter"
-        onChange={() => filterClicked('NONIMPORTANT')}
-      /> nonimportant
+        onChange={() => props.filterChange('NONIMPORTANT')}
+      />
     </div>
   )
 }
 
-export default VisibilityFilter
+export default connect(null, { filterChange })(VisibilityFilter)

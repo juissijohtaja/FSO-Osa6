@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
 import App from './App'
 import anecdoteReducer from './reducers/anecdoteReducer'
 import notificationReducer from './reducers/notificationReducer'
@@ -24,12 +25,9 @@ store.subscribe(() => console.log(store.getState()))
 //store.dispatch(notificationChange('kakka'))
 store.dispatch(createAnecdote('combineReducers forms one reduces from many simple reducers'))
 
-const renderApp = () => {
-  ReactDOM.render(
-    <App store={store} />,
-    document.getElementById('root')
-  )
-}
-
-renderApp()
-store.subscribe(renderApp)
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)

@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { filterChange, filterClear } from '../reducers/filterReducer'
 
 
@@ -7,16 +8,16 @@ const Filter = (props) => {
     // input-kentän arvo muuttujassa event.target.value
     event.preventDefault()
     const filterValue = event.target.value
-    props.store.dispatch(filterChange(filterValue))
+    props.filterChange(filterValue)
   }
   const style = {
     marginBottom: 10
   }
 
   const handleClearFilter = (event) => {
-    props.store.dispatch(filterClear())
-    console.log('CLEAR FILTER',props.store.getState().filter)
-    document.getElementById('anecdoteFilter').value = props.store.getState().filter
+    props.filterClear()
+    console.log('CLEAR FILTER',props.filter)
+    document.getElementById('anecdoteFilter').value = props.filter
   }
 
   return (
@@ -27,4 +28,15 @@ const Filter = (props) => {
   )
 }
 
-export default Filter
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    filter: state.filter,
+  }
+}
+
+const mapDispatchToProps = { filterChange, filterClear }
+
+const ConnectedFilter = connect(mapStateToProps, mapDispatchToProps)(Filter)
+
+export default ConnectedFilter
