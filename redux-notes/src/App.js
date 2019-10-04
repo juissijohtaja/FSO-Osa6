@@ -1,9 +1,18 @@
 import React from 'react'
+import  { useEffect } from 'react' 
+import { connect } from 'react-redux'
 import Notes from './components/Notes'
 import NewNote from './components/NewNote'
-import VisibilityFilter from './components/VisibilityFilter';
+import VisibilityFilter from './components/VisibilityFilter'
+import { initializeNotes } from './reducers/noteReducer'
 
-const App = () => {
+const App = (props) => {
+
+  useEffect(() => {
+    props.initializeNotes()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
   return (
     <div>
       <NewNote />
@@ -13,4 +22,6 @@ const App = () => {
   )
 }
 
-export default App
+export default connect(
+  null, { initializeNotes }
+)(App)

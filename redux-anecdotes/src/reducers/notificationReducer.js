@@ -10,6 +10,7 @@ const notificationReducer = (state = null, action) => {
 }
 
 export const notificationChange = notification => {
+  console.log('notificationChange launched',notification)
     return {
         type: 'SET_NOTIFICATION',
         notification,
@@ -17,10 +18,23 @@ export const notificationChange = notification => {
 }
 
 export const notificationClear = () => {
+  console.log('notificationClear launched')
     return {
         type: 'CLEAR_NOTIFICATION',
         notification: null,
     }
+}
+
+export const notificationSet = (notification, time) => {
+  console.log('notificationSetter launched')
+  console.log('notification timeOut in seconds:',time)
+  return async dispatch => {
+    dispatch(notificationChange(notification))
+    setTimeout(() => {
+      dispatch(notificationClear())
+      console.log('notification cleared')
+    }, time * 1000)
+  }
 }
 
 export default notificationReducer
