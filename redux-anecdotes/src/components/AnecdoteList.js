@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Anecdote from './Anecdote'
 
-import { addVote } from '../reducers/anecdoteReducer'
+import { addVote, deleteAnecdote } from '../reducers/anecdoteReducer'
 import { notificationSet } from '../reducers/notificationReducer'
 
 
@@ -16,6 +16,10 @@ const AnecdoteList = (props) => {
           handleVote={() => {
             props.addVote(anecdote)
             props.notificationSet(`You voted '${anecdote.content}'`, 3)
+          }}
+          handleDelete={() => {
+            props.deleteAnecdote(anecdote)
+            props.notificationSet(`You deleted '${anecdote.content}'`, 3)
           }}
         />
       )}
@@ -35,7 +39,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = { addVote, notificationSet }
+const mapDispatchToProps = { addVote, deleteAnecdote, notificationSet }
 
 const ConnectedAnecdoteList = connect( mapStateToProps, mapDispatchToProps )(AnecdoteList)
 
