@@ -10,6 +10,7 @@ import { initializeAnecdotes } from './reducers/anecdoteReducer'
 const App = (props) => {
   useEffect(() => {
     props.initializeAnecdotes()
+    console.log('props',props)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   return (
